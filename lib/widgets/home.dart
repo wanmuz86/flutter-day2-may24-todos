@@ -63,10 +63,25 @@ class _HomePageState extends State<HomePage> {
                 title: Text(_todos[index]["name"]!),
                 subtitle: Text(_todos[index]["place"]!),
                 trailing: Icon(Icons.chevron_right),
-                onTap: (){
-                  Navigator.push(context,MaterialPageRoute(builder: (context)=>DetailPage(
+                onTap: () async {
+                 var data = await Navigator.push(context,MaterialPageRoute(builder: (context)=>DetailPage(
                       item:_todos[index],
                   index: index,)));
+
+                 if (data != null){
+                   if (data["action"] == 1){
+                     // Delete
+                     _todos.removeAt(data["index"]);
+
+                     setState(() {
+                       _todos; // _todos = _todos;
+                     });
+
+                   }
+                   else {
+                     // Edit
+                   }
+                 }
                 },
               ),
             );

@@ -28,6 +28,12 @@ class DetailPage extends StatelessWidget {
                 TextButton(
                   onPressed: () {
                     print("ToDO: passed backward $index");
+
+                    var data = {
+                      "index":index,
+                      "action":1 // 1 is DELETE, 2 is MARK AS COMPLETED
+                    };
+                    Navigator.pop(context,data); // Pass it back
                   },
                   child: Text("Delete item"),
                 ),
