@@ -13,7 +13,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List<Map<String, dynamic>> _todos = [
+  List<dynamic> _todos = [
     {
       "name": "Navigation",
       "desc": "Basic Navigation, Pass forward, Pass back data",
@@ -39,6 +39,26 @@ class _HomePageState extends State<HomePage> {
       "completed": false
     }
   ];
+
+  // Doing an initialization upon page load (document.ready) - initState
+
+  @override
+  void initState() {
+    super.initState();
+    loadData();
+  }
+
+  void loadData() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    var todoString = prefs.getString("todos");
+    if (todoString!= null){
+      setState(() {
+        // We transform String to List<dynamic> then assign it to todos
+        _todos = jsonDecode(todoString);
+      });
+    }
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -98,7 +118,7 @@ class _HomePageState extends State<HomePage> {
                       // if true change to false
                       // if false change to true
                       // reverse it
-                      _todos[index]["completed"] = ! _todos[index]["completed"];
+                      _todos[index]["completed"] = !_todos[index]["completed"];
 
                       setState(() {
                         _todos;
@@ -127,7 +147,8 @@ class _HomePageState extends State<HomePage> {
 
             // shared prefeence code will be here
             // Obtain shared preferences.
-            final SharedPreferences prefs = await SharedPreferences.getInstance();
+            final SharedPreferences prefs =
+                await SharedPreferences.getInstance();
 // shared preference only can store : string, int, double, bool, List<String>
             // If you want to store List or Map or List of Map
             // We transform it into string first / jsonEncode
