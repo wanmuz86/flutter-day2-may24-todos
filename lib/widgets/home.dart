@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todos_may/widgets/add.dart';
+import 'package:todos_may/widgets/detail.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -51,10 +52,21 @@ class _HomePageState extends State<HomePage> {
             // The color of the container is amber
             // The container will have a centered child, with text  ...
             // the value "name" of each item in _todos List (index)
-            return Container(
-              height: 50,
-              color: Colors.amber,
-              child: Center(child: Text(_todos[index]["name"]!)),
+            // return Container(
+            //   height: 50,
+            //   color: Colors.amber,
+            //   child: Center(child: Text(_todos[index]["name"]!)),
+            // );
+
+            return Card(
+              child: ListTile(
+                title: Text(_todos[index]["name"]!),
+                subtitle: Text(_todos[index]["place"]!),
+                trailing: Icon(Icons.chevron_right),
+                onTap: (){
+                  Navigator.push(context,MaterialPageRoute(builder: (context)=>DetailPage()));
+                },
+              ),
             );
           }
       ),
