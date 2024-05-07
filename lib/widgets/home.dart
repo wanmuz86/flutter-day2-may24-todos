@@ -50,6 +50,7 @@ class _HomePageState extends State<HomePage> {
 
   void loadData() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
+    // We retrieve based on the key / filename
     var todoString = prefs.getString("todos");
     if (todoString!= null){
       setState(() {
@@ -109,6 +110,8 @@ class _HomePageState extends State<HomePage> {
 
                       /// shared preference code will be here
 
+                      saveData();
+
                       setState(() {
                         _todos; // _todos = _todos;
                       });
@@ -119,6 +122,7 @@ class _HomePageState extends State<HomePage> {
                       // if false change to true
                       // reverse it
                       _todos[index]["completed"] = !_todos[index]["completed"];
+                      saveData();
 
                       setState(() {
                         _todos;
@@ -144,15 +148,8 @@ class _HomePageState extends State<HomePage> {
 
           if (newItem != null) {
             _todos.add(newItem);
+            saveData();
 
-            // shared prefeence code will be here
-            // Obtain shared preferences.
-            final SharedPreferences prefs =
-                await SharedPreferences.getInstance();
-// shared preference only can store : string, int, double, bool, List<String>
-            // If you want to store List or Map or List of Map
-            // We transform it into string first / jsonEncode
-            prefs.setString("todos", jsonEncode(_todos)); // save
 
             setState(() {
               _todos; // _todos = _todos;
@@ -162,5 +159,18 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.red,
       ),
     );
+  }
+
+  void saveData() async {
+    // shared prefeence code will be here
+    // Obtain shared preferences.
+    final SharedPreferences prefs =
+        await SharedPreferences.getInstance();
+// shared preference only can store : string, int, double, bool, List<String>
+    // If you want to store List or Map or List of Map
+    // We transform it into string first / jsonEncode
+    // First parameter is key / filename
+    // Second parameter is what to be saved
+    prefs.setString("todos", jsonEncode(_todos)); // save
   }
 }
