@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class DetailPage extends StatelessWidget {
   final int index;
-  final Map<String, String>
+  final Map<String, dynamic>
       item; // create a variable item, of type Map<String,String>
 
   DetailPage({required this.item, required this.index});
@@ -39,6 +39,11 @@ class DetailPage extends StatelessWidget {
                 ),
                 ElevatedButton(
                     onPressed: () {
+                      var data = {
+                        "index":index,
+                        "action":2
+                      };
+                      Navigator.pop(context,data);
 
                     }, child: Text("Mark as complete"))
               ],

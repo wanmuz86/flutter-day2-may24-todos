@@ -10,26 +10,30 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List<Map<String, String>> _todos = [
+  List<Map<String, dynamic>> _todos = [
     {
       "name": "Navigation",
       "desc": "Basic Navigation, Pass forward, Pass back data",
-      "place": "Online meeting"
+      "place": "Online meeting",
+      "completed":true
     },
     {
       "name": "ListView",
       "desc": "Listview, ListTile, Card",
-      "place": "Online Meeting"
+      "place": "Online Meeting",
+      "completed":true
     },
     {
       "name": "Lunch",
       "desc": "Grab something for lunch",
-      "place": "On place/ home"
+      "place": "On place/ home",
+      "completed":true
     },
     {
       "name": "Shared Preference",
       "desc": "Local way of storing data",
-      "place": "Online meeting"
+      "place": "Online meeting",
+    "completed":false
     }
   ];
 
@@ -60,6 +64,8 @@ class _HomePageState extends State<HomePage> {
 
             return Card(
               child: ListTile(
+                leading: _todos[index]["completed"] == true ?
+                Icon(Icons.check) : SizedBox(),
                 title: Text(_todos[index]["name"]!),
                 subtitle: Text(_todos[index]["place"]!),
                 trailing: Icon(Icons.chevron_right),
@@ -72,6 +78,7 @@ class _HomePageState extends State<HomePage> {
                    if (data["action"] == 1){
                      // Delete
                      _todos.removeAt(data["index"]);
+                     /// shared preference code will be here
 
                      setState(() {
                        _todos; // _todos = _todos;
@@ -80,6 +87,12 @@ class _HomePageState extends State<HomePage> {
                    }
                    else {
                      // Edit
+                     var index = data["index"];
+                     _todos[index]["completed"] = true;
+
+                     setState(() {
+                       _todos;
+                     });
                    }
                  }
                 },
@@ -102,6 +115,9 @@ class _HomePageState extends State<HomePage> {
 
           if (newItem != null){
             _todos.add(newItem);
+
+            // shared prefeence code will be here
+
 
             setState(() {
               _todos; // _todos = _todos;

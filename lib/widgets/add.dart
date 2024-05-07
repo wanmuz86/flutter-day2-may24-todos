@@ -27,7 +27,8 @@ class AddPage extends StatelessWidget {
               var newItem = {
                 "name":nameEditingController.text,
                 "desc":descEditingController.text,
-                "place":placeEditingController.text
+                "place":placeEditingController.text,
+                "completed":false
               };
 
               print(newItem);
