@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class AddPage extends StatelessWidget {
-  const AddPage({super.key});
+  var nameEditingController = TextEditingController();
+  var descEditingController = TextEditingController();
+  var placeEditingController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -12,10 +14,26 @@ class AddPage extends StatelessWidget {
         child: Column(
           children: [
             Text("Fill in the information"),
-            TextField(decoration: InputDecoration(hintText: "Enter item name"),),
-            TextField(decoration: InputDecoration(hintText: "Enter item description"),),
-            TextField(decoration: InputDecoration(hintText: "Enter item place"),),
+            TextField(decoration: InputDecoration(hintText: "Enter item name"),
+            controller: nameEditingController,),
+            TextField(decoration: InputDecoration(hintText: "Enter item description"),
+            controller: descEditingController,),
+            TextField(decoration: InputDecoration(hintText: "Enter item place"),
+            controller: placeEditingController,),
             ElevatedButton(onPressed: (){
+
+              // Create a Map with name, desc and place
+              // We will use it later to be added inside the ListView
+              var newItem = {
+                "name":nameEditingController.text,
+                "desc":descEditingController.text,
+                "place":placeEditingController.text
+              };
+
+              print(newItem);
+
+
+
               Navigator.pop(context);
             }, child: Text("Add new Item"))
           ],
