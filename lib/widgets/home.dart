@@ -72,9 +72,24 @@ class _HomePageState extends State<HomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        onPressed: () {
-          Navigator.push(
+        onPressed: () async {
+          // We WAITTTTT (await) until the process of AddPage finish and
+          // see if there is an item passed
+          // await is part of asynchronous prograimming ( async - await)
+          // If you use await, you need to add async to the neareast
+          // function {}
+          var newItem = await Navigator.push(
               context, MaterialPageRoute(builder: (context) => AddPage()));
+
+          // 3) We check and process the passed item
+
+          if (newItem != null){
+            _todos.add(newItem);
+
+            setState(() {
+              _todos; // _todos = _todos;
+            });
+          }
         },
         backgroundColor: Colors.red,
       ),

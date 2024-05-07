@@ -8,7 +8,8 @@ class DetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Detail page"),backgroundColor: Colors.red,),
+      appBar: AppBar(title: Text("Detail page"),
+        backgroundColor: Colors.red,),
       body: Center(
         child: Column(
           children: [

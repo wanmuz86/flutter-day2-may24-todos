@@ -31,10 +31,8 @@ class AddPage extends StatelessWidget {
               };
 
               print(newItem);
-
-
-
-              Navigator.pop(context);
+              // 2) Pass the item as second argument of Navigator.pop
+              Navigator.pop(context,newItem);
             }, child: Text("Add new Item"))
           ],
         ),
