@@ -6,8 +6,21 @@ class AddPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Add new item"),),
-      body: Text("Add new item"),
+      appBar: AppBar(title: Text("Add new item"), backgroundColor: Colors.red,),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            Text("Fill in the information"),
+            TextField(decoration: InputDecoration(hintText: "Enter item name"),),
+            TextField(decoration: InputDecoration(hintText: "Enter item description"),),
+            TextField(decoration: InputDecoration(hintText: "Enter item place"),),
+            ElevatedButton(onPressed: (){
+              Navigator.pop(context);
+            }, child: Text("Add new Item"))
+          ],
+        ),
+      ),
     );
   }
 }
