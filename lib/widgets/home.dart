@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:todos_may/widgets/add.dart';
 import 'package:todos_may/widgets/detail.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -123,6 +126,12 @@ class _HomePageState extends State<HomePage> {
             _todos.add(newItem);
 
             // shared prefeence code will be here
+            // Obtain shared preferences.
+            final SharedPreferences prefs = await SharedPreferences.getInstance();
+// shared preference only can store : string, int, double, bool, List<String>
+            // If you want to store List or Map or List of Map
+            // We transform it into string first / jsonEncode
+            prefs.setString("todos", jsonEncode(_todos)); // save
 
             setState(() {
               _todos; // _todos = _todos;
