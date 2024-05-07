@@ -64,7 +64,7 @@ class _HomePageState extends State<HomePage> {
                 subtitle: Text(_todos[index]["place"]!),
                 trailing: Icon(Icons.chevron_right),
                 onTap: (){
-                  Navigator.push(context,MaterialPageRoute(builder: (context)=>DetailPage()));
+                  Navigator.push(context,MaterialPageRoute(builder: (context)=>DetailPage(item:_todos[index])));
                 },
               ),
             );
