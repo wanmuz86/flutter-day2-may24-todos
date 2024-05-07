@@ -15,25 +15,25 @@ class _HomePageState extends State<HomePage> {
       "name": "Navigation",
       "desc": "Basic Navigation, Pass forward, Pass back data",
       "place": "Online meeting",
-      "completed":true
+      "completed": true
     },
     {
       "name": "ListView",
       "desc": "Listview, ListTile, Card",
       "place": "Online Meeting",
-      "completed":true
+      "completed": true
     },
     {
       "name": "Lunch",
       "desc": "Grab something for lunch",
       "place": "On place/ home",
-      "completed":true
+      "completed": true
     },
     {
       "name": "Shared Preference",
       "desc": "Local way of storing data",
       "place": "Online meeting",
-    "completed":false
+      "completed": false
     }
   ];
 
@@ -64,42 +64,48 @@ class _HomePageState extends State<HomePage> {
 
             return Card(
               child: ListTile(
-                leading: _todos[index]["completed"] == true ?
-                Icon(Icons.check) : SizedBox(),
+                leading: _todos[index]["completed"] == true
+                    ? Icon(Icons.check)
+                    : SizedBox(),
                 title: Text(_todos[index]["name"]!),
                 subtitle: Text(_todos[index]["place"]!),
                 trailing: Icon(Icons.chevron_right),
                 onTap: () async {
-                 var data = await Navigator.push(context,MaterialPageRoute(builder: (context)=>DetailPage(
-                      item:_todos[index],
-                  index: index,)));
+                  var data = await Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => DetailPage(
+                                item: _todos[index],
+                                index: index,
+                              )));
 
-                 if (data != null){
-                   if (data["action"] == 1){
-                     // Delete
-                     _todos.removeAt(data["index"]);
-                     /// shared preference code will be here
+                  if (data != null) {
+                    if (data["action"] == 1) {
+                      // Delete
+                      _todos.removeAt(data["index"]);
 
-                     setState(() {
-                       _todos; // _todos = _todos;
-                     });
+                      /// shared preference code will be here
 
-                   }
-                   else {
-                     // Edit
-                     var index = data["index"];
-                     _todos[index]["completed"] = true;
+                      setState(() {
+                        _todos; // _todos = _todos;
+                      });
+                    } else {
+                      // Edit
+                      var index = data["index"];
+                      // if true change to false
+                      // if false change to true
+                      // reverse it
+                      _todos[index]["completed"] = ! _todos[index]["completed"];
 
-                     setState(() {
-                       _todos;
-                     });
-                   }
-                 }
+                      setState(() {
+                        _todos;
+                      });
+                    }
+                  }
                 },
               ),
             );
-          }
-      ),
+          }),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () async {
@@ -113,11 +119,10 @@ class _HomePageState extends State<HomePage> {
 
           // 3) We check and process the passed item
 
-          if (newItem != null){
+          if (newItem != null) {
             _todos.add(newItem);
 
             // shared prefeence code will be here
-
 
             setState(() {
               _todos; // _todos = _todos;

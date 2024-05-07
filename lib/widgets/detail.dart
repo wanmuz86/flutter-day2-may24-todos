@@ -30,22 +30,21 @@ class DetailPage extends StatelessWidget {
                     print("ToDO: passed backward $index");
 
                     var data = {
-                      "index":index,
-                      "action":1 // 1 is DELETE, 2 is MARK AS COMPLETED
+                      "index": index,
+                      "action": 1 // 1 is DELETE, 2 is MARK AS COMPLETED
                     };
-                    Navigator.pop(context,data); // Pass it back
+                    Navigator.pop(context, data); // Pass it back
                   },
                   child: Text("Delete item"),
                 ),
                 ElevatedButton(
                     onPressed: () {
-                      var data = {
-                        "index":index,
-                        "action":2
-                      };
-                      Navigator.pop(context,data);
-
-                    }, child: Text("Mark as complete"))
+                      var data = {"index": index, "action": 2};
+                      Navigator.pop(context, data);
+                    },
+                    child: Text(item["completed"] == true
+                        ? "Unmark completion"
+                        : "Mark as complete"))
               ],
             )
           ],
